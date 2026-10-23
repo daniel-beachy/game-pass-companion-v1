@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { AppData, SettingsApi } from "../state";
 import type { BackloggdFile } from "../lib/types";
-import { DEFAULT_PROFILES, type Profile } from "../lib/profiles";
+import type { Profile } from "../lib/profiles";
 import { TAG_LABELS, tagLabel } from "../lib/tags";
 import { BOOKMARKLET } from "../lib/bookmarklet";
 import { Section, fmtDate } from "../components/bits";
@@ -11,8 +11,8 @@ const ALL_TAGS = Object.keys(TAG_LABELS);
 export function SettingsView({ data, api }: { data: AppData; api: SettingsApi }) {
   const [editing, setEditing] = useState(api.active.id);
   const p = api.profiles.find((x) => x.id === editing) ?? api.profiles[0];
-  const setProfile = (patch: Partial<Profile>) => api.update({ profiles: api.profiles.map((x) => (x.id === p.id ? { ...x, ...patch } : x)) });
-  const edited = JSON.stringify(p) !== JSON.stringify(DEFAULT_PROFILES.find((d) => d.id === p.id));
+  const setProfile = (patch: Partial<Profile>) => api.setProfile(p.id, patch);
+  const edited = Boolean(api.settings.profileEdits[p.id]);
 
   return (
     <div className="settings">
@@ -93,7 +93,7 @@ export function SettingsView({ data, api }: { data: AppData; api: SettingsApi })
         </div>
 
         {edited ? (
-          <button className="btn ghost" onClick={() => setProfile(DEFAULT_PROFILES.find((d) => d.id === p.id)!)}>
+          <button className="btn ghost" onClick={() => api.setProfile(p.id, null)}>
             Reset {p.name} to the default
           </button>
         ) : null}

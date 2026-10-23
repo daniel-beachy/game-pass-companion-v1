@@ -6,8 +6,8 @@ const KEY = "gpc-settings-v1";
 
 export interface Settings {
   activeProfile: string;
-  /** Edited profiles; anything missing falls back to the defaults */
-  profiles: Profile[] | null;
+  /** Only the fields changed per profile, so improvements to the defaults still arrive */
+  profileEdits: Record<string, Partial<Profile>>;
   pace: Record<string, number>;
   hidePlayed: boolean;
   goal: "main" | "complete";
@@ -16,7 +16,7 @@ export interface Settings {
   dismissed: string[];
 }
 
-const DEFAULTS: Settings = { activeProfile: "couch", profiles: null, pace: {}, hidePlayed: true, goal: "main", backloggd: null, dismissed: [] };
+const DEFAULTS: Settings = { activeProfile: "couch", profileEdits: {}, pace: {}, hidePlayed: true, goal: "main", backloggd: null, dismissed: [] };
 
 function load(): Settings {
   try {
@@ -37,10 +37,20 @@ export function useSettings() {
     }
   }, [settings]);
   const update = useCallback((patch: Partial<Settings>) => setSettings((s) => ({ ...s, ...patch })), []);
-  const profiles = settings.profiles ?? DEFAULT_PROFILES;
+  const profiles = useMemo(() => DEFAULT_PROFILES.map((d) => ({ ...d, ...settings.profileEdits?.[d.id] })), [settings.profileEdits]);
+  const setProfile = useCallback(
+    (id: string, patch: Partial<Profile> | null) =>
+      setSettings((s) => {
+        const edits = { ...s.profileEdits };
+        if (patch === null) delete edits[id];
+        else edits[id] = { ...edits[id], ...patch };
+        return { ...s, profileEdits: edits };
+      }),
+    [],
+  );
   const active = profiles.find((p) => p.id === settings.activeProfile) ?? profiles[0];
   const paceFor = (p: Profile) => settings.pace[p.id] ?? p.pace;
-  return { settings, update, profiles, active, paceFor, reset: () => setSettings(DEFAULTS) };
+  return { settings, update, profiles, active, paceFor, setProfile, reset: () => setSettings(DEFAULTS) };
 }
 export type SettingsApi = ReturnType<typeof useSettings>;
 

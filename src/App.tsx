@@ -32,7 +32,7 @@ export default function App() {
     window.scrollTo(0, 0);
   }, [route.view]);
 
-  const setProfile = (patch: Partial<Profile>) => api.update({ profiles: api.profiles.map((x) => (x.id === p.id ? { ...x, ...patch } : x)) });
+  const setProfile = (patch: Partial<Profile>) => api.setProfile(p.id, patch);
   const pace = api.paceFor(p);
   const counts = data
     ? {
