@@ -30,6 +30,8 @@ export interface Game {
   catalogs: ("gamepass" | "eaplay" | "ubisoft")[];
   /** Earliest date it joined (or joins) Game Pass Ultimate */
   entryDate: string | null;
+  /** Hand-added: announced for Game Pass but not yet in Microsoft's catalog (the note says where) */
+  announced?: string | null;
   /** Date it leaves Game Pass Ultimate, when announced */
   exitDate: string | null;
   status: "coming" | "available" | "leaving";

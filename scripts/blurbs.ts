@@ -1,7 +1,7 @@
 // Writes short "why this game" notes with Claude Code (Dan's Pro plan, via CLAUDE_CODE_OAUTH_TOKEN).
-// Only games that rank well for a profile get one, each is written once, and a run is capped
-// so a single night can't burn through the plan. Without the CLI or token it does nothing,
-// and the app falls back to the rule-based explanation.
+// Runs only when Dan starts the "Write Claude notes" workflow. Only games that rank well for a
+// profile get one, each is written once, and a run is capped. `--status` just counts what's
+// missing (no Claude calls) so the site can show it; the nightly refresh runs that.
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { DEFAULT_PROFILES, type Profile } from "../src/lib/profiles.ts";
@@ -70,10 +70,14 @@ function ask(text: string): { key: string; text: string; caveat: string | null }
   return JSON.parse(json);
 }
 
+const STATUS_ONLY = process.argv.includes("--status");
+
 async function main() {
   if (!catalog) return console.log("No catalog yet; skipping blurbs.");
-  if (!process.env.CLAUDE_CODE_OAUTH_TOKEN && !process.env.BLURBS_LOCAL) return console.log("No CLAUDE_CODE_OAUTH_TOKEN; skipping blurbs (the app uses rule-based explanations).");
-  if (!cliAvailable()) return console.log("Claude Code CLI not installed; skipping blurbs.");
+  if (!STATUS_ONLY) {
+    if (!process.env.CLAUDE_CODE_OAUTH_TOKEN && !process.env.BLURBS_LOCAL) return console.log("No CLAUDE_CODE_OAUTH_TOKEN; skipping blurbs (the app uses rule-based explanations).");
+    if (!cliAvailable()) return console.log("Claude Code CLI not installed; skipping blurbs.");
+  }
 
   const blIndex = backlogIndex(bl);
   const live = new Set(catalog.games.map((g) => g.id));
@@ -98,6 +102,13 @@ async function main() {
       todo.push({ p, key, hash, data });
     }
   }
+  const status = (pending: number) =>
+    writeJson("public/data/blurbs-status.json", { pending, written: Object.keys(blurbs).length, checkedAt: new Date().toISOString() });
+  if (STATUS_ONLY) {
+    writeJson("public/data/blurbs.json", blurbs); // drops notes for games that left
+    status(todo.length);
+    return console.log(`${todo.length} notes missing or out of date.`);
+  }
   const run = todo.slice(0, MAX_PER_RUN);
   console.log(`${todo.length} notes needed; writing ${run.length} this run.`);
 
@@ -117,12 +128,14 @@ async function main() {
         // Most likely the plan's usage limit; keep what we have and try again tomorrow.
         console.warn(`Stopping early: ${(e as Error).message}`);
         writeJson("public/data/blurbs.json", blurbs);
+        status(todo.length - written);
         console.log(`Wrote ${written} notes.`);
         return;
       }
     }
   }
   writeJson("public/data/blurbs.json", blurbs);
+  status(todo.length - written);
   console.log(`Wrote ${written} notes.`);
 }
 

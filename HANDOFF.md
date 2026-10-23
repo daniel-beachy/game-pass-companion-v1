@@ -8,7 +8,7 @@ Status as of 2026-10-23. Read this first in the next session.
 - Weekly email digest to Dan only (beachysdan@gmail.com) via Gmail SMTP. Secrets are set by Dan with `gh secret set`: `GMAIL_USER`, `GMAIL_APP_PASSWORD`. Never ask for the values in chat.
 - "Why this game" blurbs: Claude Code in GitHub Actions using Dan's **Pro subscription** (`claude setup-token` → secret `CLAUDE_CODE_OAUTH_TOKEN`), model **Sonnet 5.5** (`claude-sonnet-5-5`). Only new/changed matches, batched about 25 per call, and saved to `public/data/blurbs.json` so each is written once. The tone must be grounded and honest: never overstate, and include a caveat when a game may not click. If the token or quota is missing, fall back to the rule-based `reason` from `src/lib/engine.ts`.
 - Look: dark, Xbox-adjacent, restrained green accent. Fonts: Bricolage Grotesque (display), Hanken Grotesk (body), IBM Plex Mono (numbers). These are already linked in `index.html`.
-- Taylor's taste survey: https://claude.ai/artifact/XTRZDVVjmS2iu9RL1kiuZE. Read her answers with ArtifactData `get` on collection `responses`, doc `taylor`. If she couldn't save, Dan will paste the text instead. Then refine the `taylor` profile (likes, avoid, dealbreakers, favorites, notes).
+- Tay's taste survey: https://claude.ai/artifact/XTRZDVVjmS2iu9RL1kiuZE. Read her answers with ArtifactData `get` on collection `responses`, doc `taylor`. If she couldn't save, Dan will paste the text instead. Then refine the `taylor` profile (likes, avoid, dealbreakers, favorites, notes).
 
 ## Data sources (all verified working)
 - **Catalog**: `catalog.gamepass.com/sigls/v2` list IDs (in `scripts/lib/microsoft.ts`), plus `catalog.gamepass.com/v3/products?hydration=RemoteHighSapphire0` (POST; needs an `ms-cv` header). `PassMetadataByPassProductId` gives exact **EntryDateUTC / ExitDateUTC**, which drive the coming and leaving dates. The same response also has attributes (local co-op counts, shared/split screen), accessibility features (AdjustableDifficulty), prices, platforms, and trailers.
@@ -29,7 +29,7 @@ Status as of 2026-10-23. Read this first in the next session.
 Everything in "Still to do" steps 1–7 is built. Remaining:
 - First real Actions run: confirm the scheduled refresh works with the IGDB secrets, and that blurbs run once Dan adds `CLAUDE_CODE_OAUTH_TOKEN` (the CLI isn't installed locally, so `scripts/blurbs.ts` is untested end to end).
 - Dan to add `GMAIL_USER` / `GMAIL_APP_PASSWORD` for the Sunday digest (preview at `public/digest/latest.html`).
-- Tuning: match labels are now relative per profile (`relabel` in engine.ts). Taylor's picks still lean toward big RPGs; refine from her feedback. Profiles support a `skip` list of slugs.
+- Tuning: match labels are now relative per profile (`relabel` in engine.ts). Tay's picks still lean toward big RPGs; refine from her feedback. Profiles support a `skip` list of slugs.
 - Portfolio card if Dan likes it.
 
 ## Done

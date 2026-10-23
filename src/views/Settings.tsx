@@ -99,6 +99,7 @@ export function SettingsView({ data, api }: { data: AppData; api: SettingsApi })
         ) : null}
       </Section>
 
+      <ClaudeNotes data={data} />
       <BackloggdImport data={data} api={api} />
       <Backup api={api} />
     </div>
@@ -263,6 +264,29 @@ function Backup({ api }: { api: SettingsApi }) {
         </button>
       </div>
       {msg ? <p className="small" role="status">{msg}</p> : null}
+    </Section>
+  );
+}
+
+const NOTES_WORKFLOW = "https://github.com/daniel-beachy/game-pass-companion-v1/actions/workflows/blurbs.yml";
+
+function ClaudeNotes({ data }: { data: AppData }) {
+  const st = data.blurbStatus;
+  const written = Object.keys(data.blurbs).length;
+  return (
+    <Section title="Claude notes" sub="Short “why this game” notes written by Claude (Sonnet 5.5) on Dan's Pro plan. They only run when you ask, so they never use the plan in the background.">
+      <p className="small">
+        {written} {written === 1 ? "note" : "notes"} written.{" "}
+        {st ? (st.pending ? `${st.pending} top matches don't have one yet or have changed (checked ${fmtDate(st.checkedAt, { month: "short", day: "numeric" })}).` : "Everything that ranks well has a note.") : ""}
+      </p>
+      <div className="btn-row">
+        <a className="btn" href={NOTES_WORKFLOW} target="_blank" rel="noopener noreferrer">
+          Generate notes with Claude
+        </a>
+      </div>
+      <p className="muted small">
+        Opens GitHub. Click <strong>Run workflow</strong> (you need to be signed in as Dan). It writes notes only for games that are missing one or whose details changed, then republishes the site in a few minutes. Without a note, the site shows a simpler rule-based explanation.
+      </p>
     </Section>
   );
 }

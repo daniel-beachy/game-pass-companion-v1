@@ -34,14 +34,10 @@ jobs:
           IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
         run: npx tsx scripts/refresh.ts
 
-      - name: Write "why this game" notes
+      # Counts missing Claude notes for the site; writing them is the manual "Write Claude notes" workflow.
+      - name: Check Claude notes
         if: github.event_name != 'push'
-        continue-on-error: true
-        env:
-          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-        run: |
-          if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then npm install -g @anthropic-ai/claude-code; fi
-          npx tsx scripts/blurbs.ts
+        run: npx tsx scripts/blurbs.ts --status
 
       - name: Digest preview page
         run: npx tsx scripts/digest.ts

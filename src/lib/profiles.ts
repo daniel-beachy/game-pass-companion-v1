@@ -40,7 +40,7 @@ export const DEFAULT_PROFILES: Profile[] = [
   {
     id: "couch",
     name: "Couch co-op",
-    who: "Dan + Taylor",
+    who: "Dan + Tay",
     kind: "couch",
     description: "Two players, one TV, one Xbox. Split-screen or shared-screen co-op only.",
     players: 2,
@@ -59,7 +59,7 @@ export const DEFAULT_PROFILES: Profile[] = [
     avoid: { horror: 3, difficult: 2, grind: 2, "combat-heavy": 2, shooter: 2, competitive: 3, "souls-like": 3, dark: 1 },
     dealbreakers: ["horror"],
     notes:
-      "Dan and Taylor play together on one TV with one Xbox. They love LEGO games, A Way Out, It Takes Two, Revenge of the Savage Planet, Escape Academy and Stardew Valley. They want fun, cute, cozy, puzzle, adventure and mystery games they can play together. Taylor dislikes stressful, hard or high-skill games, complicated controls and horror.",
+      "Dan and Tay play together on one TV with one Xbox. They love LEGO games, A Way Out, It Takes Two, Revenge of the Savage Planet, Escape Academy and Stardew Valley. They want fun, cute, cozy, puzzle, adventure and mystery games they can play together. Tay dislikes stressful, hard or high-skill games, complicated controls and horror.",
     pace: 4,
     useBackloggd: true,
     showOwnDeviceOption: true,
@@ -144,8 +144,8 @@ export const DEFAULT_PROFILES: Profile[] = [
   },
   {
     id: "taylor",
-    name: "Taylor solo",
-    who: "Taylor",
+    name: "Tay solo",
+    who: "Tay",
     kind: "solo",
     description: "Story-driven mysteries, history and magic. Long games are fine; frantic combat and gore are not.",
     players: 1,
@@ -157,7 +157,7 @@ export const DEFAULT_PROFILES: Profile[] = [
     avoid: { difficult: 3, "souls-like": 3, grind: 2, engineering: 2, roguelike: 3, shooter: 2, pvp: 3, competitive: 3, "combat-heavy": 2, management: 1, "base-building": 1, dark: 2, "turn-based": 1 },
     dealbreakers: ["horror", "souls-like", "competitive"],
     notes:
-      "From Taylor's own survey. Hogwarts Legacy is a favorite and she loved nearly all of it: the world, exploring the castle, secrets and collectibles, the main story, side quests, spell combat, character creation, the puzzles and playing at her own pace (on Normal). She drifted off Assassin's Creed Odyssey because it was so big she felt lost, though she liked its history, story, puzzles and combat. She is happy with 40+ hour games played about an hour at a time. Combat is fine when it isn't frantic and isn't gory; she'll retry a failed section a few times. She'll learn deeper controls if the game is worth it. Some tense moments are fine; horror is not. She reads a lot (Thursday Murder Club, The Housemaid, Gone Girl, Project Hail Mary, Hunger Games) and loves cozy whodunits, true-crime style and historical mysteries, psychological thrillers, escape-room locks, solving murders from clues, interrogating suspects and spotting hidden details. She'll read in-game text if the mystery is worth it but doesn't want a wall of text. Nearly every historical era interests her. Tones she likes: cozy, funny, epic fantasy, twisty. From short pitches she loved Assassin's Creed Mirage, The Case of the Golden Idol, Spiritfarer and solo Stardew Valley, and said no to Hades (roguelike, fast combat) and Unpacking. Choices matter less to her than a strong story. Point out clear objectives in big open worlds, and mention difficulty options.",
+      "From Tay's own survey. Hogwarts Legacy is a favorite; Tay loved nearly all of it: the world, exploring the castle, secrets and collectibles, the main story, side quests, spell combat, character creation, the puzzles and going at a self-set pace (on Normal). Tay drifted off Assassin's Creed Odyssey because it felt too big to keep track of, though its history, story, puzzles and combat were enjoyable. Tay is happy with 40+ hour games played about an hour at a time. Combat is fine when it isn't frantic and isn't gory; Tay will retry a failed section a few times. Tay will learn deeper controls if the game is worth it. Some tense moments are fine; horror is not. Tay reads a lot (Thursday Murder Club, The Housemaid, Gone Girl, Project Hail Mary, Hunger Games) and loves cozy whodunits, true-crime style and historical mysteries, psychological thrillers, escape-room locks, solving murders from clues, interrogating suspects and spotting hidden details. Tay will read in-game text if the mystery is worth it but doesn't want a wall of text. Nearly every historical era is interesting. Favorite tones: cozy, funny, epic fantasy, twisty. From short pitches, Tay loved Assassin's Creed Mirage, The Case of the Golden Idol, Spiritfarer and solo Stardew Valley, and said no to Hades (roguelike, fast combat) and Unpacking. Choices matter less than a strong story. Point out clear objectives in big open worlds, and mention difficulty options.",
     pace: 5,
     useBackloggd: false,
     wantsEasyModes: true,

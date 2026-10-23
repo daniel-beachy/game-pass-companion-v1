@@ -1,0 +1,56 @@
+name: Write Claude notes
+
+# Manual only, so Claude usage happens just when Dan asks for it.
+on:
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: "Most notes to write this run"
+        default: "200"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm install -g @anthropic-ai/claude-code
+      - name: Write notes
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          BLURB_LIMIT: ${{ inputs.limit }}
+        run: npx tsx scripts/blurbs.ts
+      - name: Commit notes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/data
+          git diff --cached --quiet || git commit -m "Claude notes"
+          git pull --rebase -X theirs origin main && git push
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

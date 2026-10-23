@@ -20,6 +20,9 @@ interface Override {
   removeTags?: string[];
 }
 const overrides = readJson<Record<string, Override>>("data/overrides.json", {});
+// Games announced for Game Pass that Microsoft's catalog doesn't list yet, added by hand:
+// { "<store id>": { "date": "2026-11-02", "note": "Announced on Xbox Wire" } }
+const announced = readJson<Record<string, { date: string; note?: string }>>("data/announced.json", {});
 const overrideFor = (id: string, title: string) => overrides[id] ?? overrides[normTitle(title)] ?? overrides[dedupeKey(title)];
 
 async function main() {
@@ -32,7 +35,18 @@ async function main() {
   const eaSet = new Set([...lists.eaConsole, ...lists.eaPc]);
   const leavingSet = new Set([...lists.leavingConsole, ...lists.leavingPc]);
   const comingSet = new Set([...lists.comingConsole, ...lists.comingPc]);
-  const allIds = [...new Set([...consoleSet, ...pcSet, ...cloudSet])];
+  const known = new Set([...consoleSet, ...pcSet, ...cloudSet]);
+  // Hand-added announcements only fill gaps: once Microsoft lists a game, its own data wins.
+  const extra = Object.entries(announced).filter(([id, a]) => {
+    if (known.has(id)) return false;
+    if (Date.parse(a.date) < now - 3 * 864e5) {
+      warnings.push(`Announced game ${id} was due ${a.date} but still isn't in Microsoft's Game Pass catalog; remove it from data/announced.json if it was delayed.`);
+      return false;
+    }
+    return true;
+  });
+  for (const [id] of extra) comingSet.add(id);
+  const allIds = [...known, ...extra.map(([id]) => id)];
   console.log(`  ${allIds.length} products`);
 
   console.log("Fetching product details…");
@@ -88,9 +102,12 @@ async function main() {
   for (const id of allIds) {
     const p = products[id];
     if (!p) continue;
+    const plat: string[] = p.AvailablePlatforms ?? [];
+    const ann = announced[id] && !known.has(id) ? announced[id] : undefined;
     const g = buildGame(id, p, {
-      console: consoleSet.has(id),
-      pc: pcSet.has(id),
+      announced: ann,
+      console: consoleSet.has(id) || Boolean(ann && plat.some((x) => /^Xbox/.test(x))),
+      pc: pcSet.has(id) || Boolean(ann && plat.includes("PC")),
       cloud: cloudSet.has(id),
       ea: eaSet.has(id),
       leavingList: leavingSet.has(id),
@@ -133,7 +150,7 @@ async function main() {
 function buildGame(
   id: string,
   p: any,
-  ctx: { console: boolean; pc: boolean; cloud: boolean; ea: boolean; leavingList: boolean; comingList: boolean; igdb?: any; ttb?: any; steam?: { appId: number; info: SteamInfo | null } },
+  ctx: { announced?: { date: string; note?: string }; console: boolean; pc: boolean; cloud: boolean; ea: boolean; leavingList: boolean; comingList: boolean; igdb?: any; ttb?: any; steam?: { appId: number; info: SteamInfo | null } },
 ): Game | null {
   if (p.ProductType && p.ProductType !== "Game") return null;
   const title: string = p.ProductTitle;
@@ -143,7 +160,7 @@ function buildGame(
   const exits = Object.values(passes)
     .map((x) => x.ExitDateUTC)
     .filter((d): d is string => Boolean(d) && Date.parse(d!) < now + 2 * 365 * 864e5);
-  const entryDate = entries.sort()[0] ?? null;
+  const entryDate = entries.sort()[0] ?? (ctx.announced ? `${ctx.announced.date}T12:00:00Z` : null);
   // A game leaves Ultimate only when every pass it's in has an exit date.
   const allExit = Object.keys(passes).length > 0 && exits.length === Object.keys(passes).length;
   const exitDate = allExit ? exits.sort().reverse()[0] : null;
@@ -232,6 +249,7 @@ function buildGame(
     exitDate,
     status,
     gamePreview: /game preview/i.test(title),
+    announced: ctx.announced ? ctx.announced.note ?? "Announced" : null,
     price,
     categories: p.Categories ?? [],
     couch,

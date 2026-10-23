@@ -87,6 +87,8 @@ export function GameDetail({ id, data, model, api }: { id: string; data: AppData
             {g.status === "coming" ? `Arrives ${fmtDate(g.entryDate, { month: "long", day: "numeric" })} · ${relDays(g.entryDate)}` : g.status === "leaving" ? `Leaves ${fmtDate(g.exitDate, { month: "long", day: "numeric" })} · ${relDays(g.exitDate)}` : g.entryDate ? `On Game Pass since ${fmtDate(g.entryDate, { month: "short", day: "numeric", year: "numeric" })}` : "On Game Pass"}
           </p>
 
+          {g.announced ? <p className="small caveat">{g.announced}</p> : null}
+
           <div className="gd-grid">
             <div className="gd-col">
               <h3>For each of you</h3>
@@ -116,7 +118,7 @@ export function GameDetail({ id, data, model, api }: { id: string; data: AppData
 
               {g.status !== "coming" ? (
                 <>
-                  <h3>Should {p.name === "Taylor solo" ? "Taylor" : "you"} start it?</h3>
+                  <h3>Should {p.kind === "solo" ? p.who : "you"} start it?</h3>
                   <div className="gd-verdict">
                     <VerdictPill v={v} />
                     <p className="small">{v.detail}</p>

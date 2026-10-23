@@ -58,6 +58,7 @@ export interface AppData {
   catalog: CatalogFile;
   blurbs: BlurbFile;
   backloggd: BackloggdFile | null;
+  blurbStatus: { pending: number; written: number; checkedAt: string } | null;
 }
 
 export function useData() {
@@ -66,10 +67,10 @@ export function useData() {
   useEffect(() => {
     const base = import.meta.env.BASE_URL + "data/";
     const get = (f: string) => fetch(base + f).then((r) => (r.ok ? r.json() : null));
-    Promise.all([get("catalog.json"), get("blurbs.json").catch(() => ({})), get("backloggd.json").catch(() => null)])
-      .then(([catalog, blurbs, backloggd]) => {
+    Promise.all([get("catalog.json"), get("blurbs.json").catch(() => ({})), get("backloggd.json").catch(() => null), get("blurbs-status.json").catch(() => null)])
+      .then(([catalog, blurbs, backloggd, blurbStatus]) => {
         if (!catalog) throw new Error("The game catalog didn't load.");
-        setData({ catalog, blurbs: blurbs ?? {}, backloggd });
+        setData({ catalog, blurbs: blurbs ?? {}, backloggd, blurbStatus });
       })
       .catch((e) => setError(String(e.message ?? e)));
   }, []);

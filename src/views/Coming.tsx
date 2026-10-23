@@ -31,6 +31,7 @@ export function Coming({ data, model, api }: { data: AppData; model: Model; api:
                     <div className="row-title">
                       {g.title}
                       {g.gamePreview ? <span className="flag">Game Preview</span> : null}
+                      {g.announced ? <span className="flag" title={g.announced}>Added by hand</span> : null}
                     </div>
                     <div className="card-meta">
                       <Platforms g={g} />
