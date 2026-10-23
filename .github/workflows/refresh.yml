@@ -53,7 +53,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add public/data data public/digest
           git diff --cached --quiet || git commit -m "Nightly data refresh"
-          git push
+          git pull --rebase -X theirs origin main && git push
 
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
