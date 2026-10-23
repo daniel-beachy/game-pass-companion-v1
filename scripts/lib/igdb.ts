@@ -29,6 +29,10 @@ export async function igdb<T = any>(endpoint: string, body: string): Promise<T[]
       await sleep(2000);
       continue;
     }
+    if (res.status === 401 && i < 3) {
+      token = null; // token expired or was revoked mid-run; fetch a fresh one
+      continue;
+    }
     if (!res.ok) throw new Error(`IGDB ${endpoint} ${res.status}: ${await res.text()}`);
     return (await res.json()) as T[];
   }
