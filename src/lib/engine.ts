@@ -88,8 +88,10 @@ export function scoreGame(g: Game, p: Profile, seeds: { seed: Seed; weight: numb
   const liked: [string, number][] = [];
   for (const [t, w] of Object.entries(p.likes)) if (tags.has(t)) (taste += w, liked.push([t, w]));
   const cautions: string[] = [];
+  let worstAvoid = 0;
   for (const [t, w] of Object.entries(p.avoid)) {
     if (!tags.has(t)) continue;
+    worstAvoid = Math.max(worstAvoid, w);
     taste -= w * 1.3;
     if (w >= 2) cautions.push(tagLabel(t));
   }
@@ -126,7 +128,10 @@ export function scoreGame(g: Game, p: Profile, seeds: { seed: Seed; weight: numb
   if (g.gamePreview) extra -= 0.2;
 
   const raw = 0.42 * tasteScore + 0.4 * simScore + 0.13 * qScore + 0.12 * extra;
-  const score = Math.round(Math.max(0, Math.min(100, 50 + raw * 60)));
+  let score = Math.round(Math.max(0, Math.min(100, 50 + raw * 60)));
+  // Don't call something a great match while warning about a strong dislike.
+  if (worstAvoid >= 3) score = Math.min(score, 59);
+  else if (worstAvoid >= 2) score = Math.min(score, 71);
   const label = score >= 72 ? "Great match" : score >= 60 ? "Good match" : score >= 48 ? "Worth a look" : "Probably not";
 
   const likeFavorites = top.filter((x) => x.s >= 0.22).slice(0, 2).map((x) => x.title);

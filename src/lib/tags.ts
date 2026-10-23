@@ -81,7 +81,7 @@ export const tagLabel = (t: string) => TAG_LABELS[t] ?? t;
 
 // raw (lowercased) -> canonical tags
 const MAP: Record<string, string[]> = {
-  cozy: ["cozy"], wholesome: ["cozy"], cute: ["cute"], "family friendly": ["family"], kids: ["family"], "kids": ["family"],
+  cozy: ["cozy"], wholesome: ["cozy"], cute: ["cute"], "family friendly": ["family"], kids: ["family"],
   comedy: ["funny"], funny: ["funny"], humor: ["funny"], relaxing: ["relaxing"], casual: ["relaxing"],
   puzzle: ["puzzle"], "puzzle-platformer": ["puzzle", "platformer"], logic: ["logic", "puzzle"], "logic puzzle": ["logic", "puzzle"],
   automation: ["engineering"], programming: ["engineering"], "factory": ["engineering"], "colony sim": ["management", "base-building"],

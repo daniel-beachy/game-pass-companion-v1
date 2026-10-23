@@ -139,7 +139,10 @@ function buildGame(
   const title: string = p.ProductTitle;
   const passes: Record<string, { EntryDateUTC?: string; ExitDateUTC?: string }> = p.PassMetadataByPassProductId ?? {};
   const entries = Object.values(passes).map((x) => x.EntryDateUTC).filter(Boolean) as string[];
-  const exits = Object.values(passes).map((x) => x.ExitDateUTC).filter(Boolean) as string[];
+  // Far-future exit dates (2099, 9998) are placeholders for "no end date".
+  const exits = Object.values(passes)
+    .map((x) => x.ExitDateUTC)
+    .filter((d): d is string => Boolean(d) && Date.parse(d!) < now + 2 * 365 * 864e5);
   const entryDate = entries.sort()[0] ?? null;
   // A game leaves Ultimate only when every pass it's in has an exit date.
   const allExit = Object.keys(passes).length > 0 && exits.length === Object.keys(passes).length;
@@ -340,6 +343,11 @@ function dedupe(games: Game[]): Game[] {
       cloud: keep.platforms.cloud || other.platforms.cloud,
       handheld: keep.platforms.handheld || other.platforms.handheld,
     };
+    // Leaving only if every copy is leaving; keep the earliest arrival.
+    keep.exitDate = keep.exitDate && other.exitDate ? [keep.exitDate, other.exitDate].sort()[1] : null;
+    if (other.entryDate && (!keep.entryDate || other.entryDate < keep.entryDate)) keep.entryDate = other.entryDate;
+    if (keep.status === "leaving" && !keep.exitDate) keep.status = other.status === "leaving" ? "leaving" : "available";
+    keep.catalogs = [...new Set([...keep.catalogs, ...other.catalogs])];
     keep.title = keep.title.replace(/\s*(Xbox Series X\|S|Xbox One|for Windows( 10)?)\s*$/i, "").trim();
     byKey.set(key, keep);
   }
