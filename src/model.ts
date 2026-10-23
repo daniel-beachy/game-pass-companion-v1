@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { backlogIndex, eligible, scoreGame, seedsFor, type Match } from "./lib/engine";
+import { backlogIndex, eligible, quality, relabel, scoreGame, seedsFor, type Match } from "./lib/engine";
 import type { Profile } from "./lib/profiles";
 import type { Game } from "./lib/types";
 import type { AppData, SettingsApi } from "./state";
@@ -24,6 +24,7 @@ export function useModel(data: AppData | null, api: SettingsApi) {
         const fits = eligible(g, p).ok;
         map.set(g.id, { g, m: scoreGame(g, p, seeds, p.useBackloggd ? blIndex : undefined), fits });
       }
+      relabel([...map.values()].filter((s) => s.fits).map((s) => s.m));
       byProfile.set(p.id, map);
     }
     return { byProfile, blIndex, bl };
@@ -36,7 +37,7 @@ export function ranked(model: Model, p: Profile, filter: (s: Scored) => boolean 
   if (!map) return [];
   return [...map.values()]
     .filter((s) => s.fits && filter(s) && !(hidePlayed && s.m.backlog?.played))
-    .sort((a, b) => b.m.score - a.m.score);
+    .sort((a, b) => b.m.score - a.m.score || (quality(b.g) ?? 0) - (quality(a.g) ?? 0));
 }
 
 /** Which profiles a game suits (for chips on Leaving / Coming lists). */

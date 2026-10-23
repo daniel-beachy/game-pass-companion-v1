@@ -25,6 +25,13 @@ Status as of 2026-10-23. Read this first in the next session.
   - Don't work around any of these.
 - **Backloggd**: Dan's lists were imported once through the in-app browser into `data/backloggd.json` (copied to `public/data/`). For refreshes, build a bookmarklet Dan runs on backloggd.com. Its scrape logic: fetch `/u/<user>/games/added/type:{played|playing|backlog|wishlist};/?page=N`, parse `.game-cover[game_id]` (`game_id` = IGDB id, `data-rating` 1–10), then copy JSON to the clipboard. The app's Settings gets a paste box that saves the result to `settings.backloggd`.
 
+## Status (end of session 2, 2026-10-23)
+Everything in "Still to do" steps 1–7 is built. Remaining:
+- First real Actions run: confirm the scheduled refresh works with the IGDB secrets, and that blurbs run once Dan adds `CLAUDE_CODE_OAUTH_TOKEN` (the CLI isn't installed locally, so `scripts/blurbs.ts` is untested end to end).
+- Dan to add `GMAIL_USER` / `GMAIL_APP_PASSWORD` for the Sunday digest (preview at `public/digest/latest.html`).
+- Tuning: match labels are now relative per profile (`relabel` in engine.ts). Taylor's picks still lean toward big RPGs; refine from her feedback. Profiles support a `skip` list of slugs.
+- Portfolio card if Dan likes it.
+
 ## Done
 - `scripts/refresh.ts` plus `scripts/lib/*`: the full pipeline, writing `public/data/catalog.json`. It handles couch co-op merging with confidence levels, dedupe, taste seeds, and `data/history.json`. Hand-checked corrections go in `data/overrides.json` (keyed by store ID or normalized title; not created yet).
 - The first refresh was **started** and may still be running or partly done (`npx tsx scripts/refresh.ts`). If `public/data/catalog.json` is missing, rerun it. The Steam cache resumes where it stopped.

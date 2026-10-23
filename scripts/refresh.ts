@@ -20,7 +20,7 @@ interface Override {
   removeTags?: string[];
 }
 const overrides = readJson<Record<string, Override>>("data/overrides.json", {});
-const overrideFor = (id: string, title: string) => overrides[id] ?? overrides[normTitle(title)];
+const overrideFor = (id: string, title: string) => overrides[id] ?? overrides[normTitle(title)] ?? overrides[dedupeKey(title)];
 
 async function main() {
   console.log("Fetching Game Pass lists…");
@@ -312,7 +312,9 @@ function buildCouch(attrs: { Name: string; LocalizedName: string }[], igdb: any,
   }
 
   const yes = [msYes || null, igYes, stYes].filter((x) => x === true).length;
-  const no = [igYes, stYes].filter((x) => x === false).length; // the store's silence isn't a "no"
+  // The store's silence isn't a "no", and Steam's "no" is ignored when the Xbox store says yes:
+  // PC ports often drop split-screen that the console version has.
+  const no = [igYes, msYes ? null : stYes].filter((x) => x === false).length;
   let supported: boolean | null = null;
   let confidence: CouchInfo["confidence"] = "unknown";
   if (yes >= 2 && no === 0) [supported, confidence] = [true, "agree"];
@@ -326,16 +328,25 @@ function buildCouch(attrs: { Name: string; LocalizedName: string }[], igdb: any,
 }
 
 /** Same game listed twice (Xbox One + Series X|S, or PC + console SKUs): keep one, merge platforms. */
+// Strips platform and edition noise so "Diablo IV PC" and "Diablo IV - Standard Edition" meet.
+const dedupeKey = (t: string) =>
+  normTitle(t)
+    .replace(/\b(pc|launcher|cross gen bundle|digital( standard)?( edition| version)?|standard|deluxe|gold edition|standalone)\b/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
 function dedupe(games: Game[]): Game[] {
   const byKey = new Map<string, Game>();
   for (const g of games) {
-    const key = g.igdb ? `igdb:${g.igdb.id}` : `t:${normTitle(g.title)}`;
-    const prev = byKey.get(key);
+    const keys = [`t:${dedupeKey(g.title)}`, ...(g.igdb ? [`igdb:${g.igdb.id}`] : [])];
+    const prev = keys.map((k) => byKey.get(k)).find(Boolean);
     if (!prev) {
-      byKey.set(key, g);
+      for (const k of keys) byKey.set(k, g);
       continue;
     }
-    const keep = /xbox one/i.test(prev.title) && !/xbox one/i.test(g.title) ? g : prev;
+    // Prefer the console listing with IGDB data; its dates and co-op info are what couch profiles use.
+    const rank = (x: Game) => (x.platforms.console ? 2 : 0) + (x.igdb ? 1 : 0) - (/xbox one/i.test(x.title) ? 1 : 0);
+    const keep = rank(g) > rank(prev) ? g : prev;
     const other = keep === prev ? g : prev;
     keep.platforms = {
       console: keep.platforms.console || other.platforms.console,
@@ -348,10 +359,15 @@ function dedupe(games: Game[]): Game[] {
     if (other.entryDate && (!keep.entryDate || other.entryDate < keep.entryDate)) keep.entryDate = other.entryDate;
     if (keep.status === "leaving" && !keep.exitDate) keep.status = other.status === "leaving" ? "leaving" : "available";
     keep.catalogs = [...new Set([...keep.catalogs, ...other.catalogs])];
-    keep.title = keep.title.replace(/\s*(Xbox Series X\|S|Xbox One|for Windows( 10)?)\s*$/i, "").trim();
-    byKey.set(key, keep);
+    keep.title = keep.title.replace(/\s*(Xbox Series X\|S|Xbox One|for Windows( 10)?|PC)\s*$/i, "").trim();
+    keep.igdb ??= other.igdb;
+    keep.ttb ??= other.ttb;
+    keep.steam ??= other.steam;
+    if (keep.couch.confidence === "unknown" && other.couch.confidence !== "unknown") keep.couch = other.couch;
+    if (!keep.tags.length) keep.tags = other.tags;
+    for (const k of [`t:${dedupeKey(g.title)}`, `t:${dedupeKey(keep.title)}`, ...(keep.igdb ? [`igdb:${keep.igdb.id}`] : []), ...(g.igdb ? [`igdb:${g.igdb.id}`] : [])]) byKey.set(k, keep);
   }
-  return [...byKey.values()];
+  return [...new Set(byKey.values())];
 }
 
 async function buildSeeds(): Promise<Record<string, Seed>> {

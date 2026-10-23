@@ -1,0 +1,141 @@
+{
+ "stardew valley": {
+  "couch": {
+   "supported": true,
+   "max": 4,
+   "splitScreen": true,
+   "coop": true,
+   "note": "Split-screen co-op for up to 4 on console, added in update 1.5. Each player needs their own farmhand cabin."
+  }
+ },
+ "rayman legends": {
+  "couch": {
+   "supported": true,
+   "max": 4,
+   "splitScreen": false,
+   "coop": true,
+   "note": "Drop-in shared-screen co-op for up to 4."
+  }
+ },
+ "diablo ii resurrected": {
+  "couch": {
+   "supported": true,
+   "max": 4,
+   "splitScreen": false,
+   "coop": true,
+   "note": "Couch co-op for up to 4 on console, sharing one screen."
+  }
+ },
+ "terraria": {
+  "couch": {
+   "supported": true,
+   "max": 4,
+   "splitScreen": true,
+   "coop": true,
+   "note": "Split-screen for up to 4 on console."
+  }
+ },
+ "call of duty warzone": {
+  "couch": {
+   "supported": false,
+   "note": "Online only; no split-screen."
+  }
+ },
+ "overwatch": {
+  "couch": {
+   "supported": false,
+   "note": "Online only; no split-screen."
+  }
+ },
+ "star wars battlefront": {
+  "couch": {
+   "supported": true,
+   "max": 2,
+   "splitScreen": true,
+   "coop": true,
+   "note": "Two-player split-screen in the offline missions only."
+  }
+ },
+ "age of empires": {
+  "couch": {
+   "supported": false,
+   "note": "No local multiplayer on one console."
+  }
+ },
+ "age of empires ii": {
+  "couch": {
+   "supported": false,
+   "note": "No local multiplayer on one console."
+  }
+ },
+ "it takes two": {
+  "couch": {
+   "supported": true,
+   "max": 2,
+   "splitScreen": true,
+   "coop": true,
+   "note": "Built for two; co-op only, split-screen."
+  }
+ },
+ "a way out": {
+  "couch": {
+   "supported": true,
+   "max": 2,
+   "splitScreen": true,
+   "coop": true,
+   "note": "Built for two; co-op only, split-screen."
+  }
+ },
+ "unravel two": {
+  "couch": {
+   "supported": true,
+   "max": 2,
+   "splitScreen": false,
+   "coop": true,
+   "note": "Shared-screen co-op for two; can also be played solo."
+  }
+ },
+ "overcooked 2": {
+  "couch": {
+   "supported": true,
+   "max": 4,
+   "splitScreen": false,
+   "coop": true,
+   "note": "Shared-screen co-op for up to 4."
+  }
+ },
+ "moving out 2": {
+  "couch": {
+   "supported": true,
+   "max": 4,
+   "splitScreen": false,
+   "coop": true,
+   "note": "Shared-screen co-op for up to 4."
+  }
+ },
+ "minecraft dungeons": {
+  "couch": {
+   "supported": true,
+   "max": 4,
+   "splitScreen": false,
+   "coop": true,
+   "note": "Shared-screen co-op for up to 4."
+  }
+ },
+ "assassin s creed iv black flag": {
+  "couch": {
+   "supported": false,
+   "note": "Single-player campaign; multiplayer is online only."
+  }
+ },
+ "kingdom come deliverance ii": {
+  "addTags": [
+   "difficult"
+  ]
+ },
+ "kingdom come deliverance": {
+  "addTags": [
+   "difficult"
+  ]
+ }
+}

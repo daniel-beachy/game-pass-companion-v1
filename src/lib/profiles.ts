@@ -28,6 +28,8 @@ export interface Profile {
   pace: number;
   /** Use Dan's Backloggd lists to flag played / backlog games */
   useBackloggd: boolean;
+  /** IGDB / Backloggd slugs this profile has already tried and doesn't want suggested */
+  skip?: string[];
   /** Mention difficulty options prominently */
   wantsEasyModes?: boolean;
   /** Secondary idea: each person on their own device (cloud + online co-op) */
@@ -54,7 +56,7 @@ export const DEFAULT_PROFILES: Profile[] = [
       { title: "Stardew Valley", slug: "stardew-valley" },
     ],
     likes: { cozy: 3, cute: 3, puzzle: 3, adventure: 2, mystery: 3, "escape-room": 3, funny: 2, lego: 3, exploration: 1, story: 2, colorful: 1, family: 1, platformer: 1 },
-    avoid: { horror: 3, difficult: 2, grind: 2, "combat-heavy": 1, competitive: 3, "souls-like": 3, dark: 1 },
+    avoid: { horror: 3, difficult: 2, grind: 2, "combat-heavy": 2, shooter: 2, competitive: 3, "souls-like": 3, dark: 1 },
     dealbreakers: ["horror"],
     notes:
       "Dan and Taylor play together on one TV with one Xbox. They love LEGO games, A Way Out, It Takes Two, Revenge of the Savage Planet, Escape Academy and Stardew Valley. They want fun, cute, cozy, puzzle, adventure and mystery games they can play together. Taylor dislikes stressful, hard or high-skill games, complicated controls and horror.",
@@ -152,12 +154,13 @@ export const DEFAULT_PROFILES: Profile[] = [
       { title: "Stardew Valley", slug: "stardew-valley" },
     ],
     likes: { story: 3, mystery: 3, detective: 3, "escape-room": 3, historical: 3, magic: 3, fantasy: 2, exploration: 2, adventure: 3, cozy: 2, relaxing: 1, funny: 1, emotional: 2, "open-world": 1, puzzle: 2, logic: 1, farming: 1, "hidden-object": 1, "point-and-click": 1, choices: 1, "female-protagonist": 1 },
-    avoid: { difficult: 3, "souls-like": 3, grind: 2, engineering: 2, roguelike: 3, shooter: 2, pvp: 3, competitive: 3, "combat-heavy": 2, dark: 1, management: 1, "base-building": 1 },
+    avoid: { difficult: 3, "souls-like": 3, grind: 2, engineering: 2, roguelike: 3, shooter: 2, pvp: 3, competitive: 3, "combat-heavy": 2, management: 1, "base-building": 1, dark: 2, "turn-based": 1 },
     dealbreakers: ["horror", "souls-like", "competitive"],
     notes:
       "From Taylor's own survey. Hogwarts Legacy is a favorite and she loved nearly all of it: the world, exploring the castle, secrets and collectibles, the main story, side quests, spell combat, character creation, the puzzles and playing at her own pace (on Normal). She drifted off Assassin's Creed Odyssey because it was so big she felt lost, though she liked its history, story, puzzles and combat. She is happy with 40+ hour games played about an hour at a time. Combat is fine when it isn't frantic and isn't gory; she'll retry a failed section a few times. She'll learn deeper controls if the game is worth it. Some tense moments are fine; horror is not. She reads a lot (Thursday Murder Club, The Housemaid, Gone Girl, Project Hail Mary, Hunger Games) and loves cozy whodunits, true-crime style and historical mysteries, psychological thrillers, escape-room locks, solving murders from clues, interrogating suspects and spotting hidden details. She'll read in-game text if the mystery is worth it but doesn't want a wall of text. Nearly every historical era interests her. Tones she likes: cozy, funny, epic fantasy, twisty. From short pitches she loved Assassin's Creed Mirage, The Case of the Golden Idol, Spiritfarer and solo Stardew Valley, and said no to Hades (roguelike, fast combat) and Unpacking. Choices matter less to her than a strong story. Point out clear objectives in big open worlds, and mention difficulty options.",
     pace: 5,
     useBackloggd: false,
     wantsEasyModes: true,
+    skip: ["assassins-creed-odyssey", "hades", "unpacking"],
   },
 ];

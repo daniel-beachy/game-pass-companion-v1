@@ -34,6 +34,7 @@ export function backlogIndex(bl: BackloggdFile | null) {
 /** Does this game fit how the profile plays at all? */
 export function eligible(g: Game, p: Profile, players = p.players): { ok: boolean; why?: string } {
   if (p.dealbreakers.some((t) => g.tags.includes(t))) return { ok: false, why: "dealbreaker" };
+  if (g.igdb && p.skip?.includes(g.igdb.slug)) return { ok: false, why: "skipped" };
   switch (p.kind) {
     case "couch":
     case "party": {
@@ -127,8 +128,8 @@ export function scoreGame(g: Game, p: Profile, seeds: { seed: Seed; weight: numb
   if (bl?.wishlist || bl?.backlog) extra += 0.35;
   if (g.gamePreview) extra -= 0.2;
 
-  const raw = 0.42 * tasteScore + 0.4 * simScore + 0.13 * qScore + 0.12 * extra;
-  let score = Math.round(Math.max(0, Math.min(100, 50 + raw * 60)));
+  const raw = 0.4 * tasteScore + 0.37 * simScore + 0.2 * qScore + 0.12 * extra;
+  let score = Math.round(Math.max(0, Math.min(100, 50 + raw * 48)));
   // Don't call something a great match while warning about a strong dislike.
   if (worstAvoid >= 3) score = Math.min(score, 59);
   else if (worstAvoid >= 2) score = Math.min(score, 71);
@@ -138,6 +139,19 @@ export function scoreGame(g: Game, p: Profile, seeds: { seed: Seed; weight: numb
   const sharedTags = [...new Set([...liked.sort((a, b) => b[1] - a[1]).map(([t]) => t), ...(top[0]?.inter ?? [])])].filter((t) => !WEAK.has(t)).slice(0, 4);
 
   return { score, label, likeFavorites, sharedTags, cautions, backlog: bl, reason: explain(g, p, likeFavorites, sharedTags, cautions, bl) };
+}
+
+/**
+ * Labels are relative within a profile's eligible games, so "Great match" stays rare even when
+ * a profile's tastes overlap with much of the catalog. The fixed floors still apply.
+ */
+export function relabel(ms: Match[]) {
+  const sorted = ms.map((m) => m.score).sort((a, b) => b - a);
+  const at = (q: number) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * q))] ?? 100;
+  const great = Math.max(72, at(0.08));
+  const good = Math.max(60, at(0.25));
+  const maybe = Math.max(48, at(0.5));
+  for (const m of ms) m.label = m.score >= great ? "Great match" : m.score >= good ? "Good match" : m.score >= maybe ? "Worth a look" : "Probably not";
 }
 
 function explain(g: Game, p: Profile, favs: string[], shared: string[], cautions: string[], bl?: BacklogStatus) {

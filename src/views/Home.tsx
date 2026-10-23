@@ -16,7 +16,17 @@ export function Home({ data, model, api }: { data: AppData; model: Model; api: S
   const coming = ranked(model, p, (s) => s.g.status === "coming" && s.m.score >= 50, hide).sort((a, b) => (a.g.entryDate ?? "9").localeCompare(b.g.entryDate ?? "9"));
   const fresh = all.filter((s) => s.g.status !== "coming" && s.g.entryDate && Date.now() - Date.parse(s.g.entryDate) < 30 * 864e5 && good(s)).slice(0, 12);
   const listed = all.filter((s) => s.m.backlog && (s.m.backlog.backlog || s.m.backlog.wishlist || s.m.backlog.playing) && s.g.status !== "coming");
-  const picks = all.filter((s) => s.g.status !== "coming" && !listed.includes(s)).slice(0, 18);
+  // At most two from any one series, so a big franchise doesn't fill the list.
+  const perSeries = new Map<string, number>();
+  const picks = all
+    .filter((s) => s.g.status !== "coming" && !listed.includes(s))
+    .filter((s) => {
+      const f = s.g.franchises[0];
+      if (!f) return true;
+      perSeries.set(f, (perSeries.get(f) ?? 0) + 1);
+      return perSeries.get(f)! <= 2;
+    })
+    .slice(0, 18);
   const ownDevice =
     p.showOwnDeviceOption
       ? ranked(model, { ...p, kind: "online" }, (s) => s.g.platforms.cloud && s.g.online.coop && s.g.online.crossPlatform && s.g.couch.supported !== true, hide).slice(0, 8)
