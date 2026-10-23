@@ -1,0 +1,764 @@
+{
+ "user": "sirdannydan",
+ "importedAt": "2026-10-23T22:01:10.359Z",
+ "lists": {
+  "played": [
+   {
+    "igdbId": 121760,
+    "slug": "little-nightmares-ii",
+    "title": "Little Nightmares II",
+    "rating": 7
+   },
+   {
+    "igdbId": 218282,
+    "slug": "1000xresist",
+    "title": "1000xResist",
+    "rating": 6
+   },
+   {
+    "igdbId": 5973,
+    "slug": "broforce",
+    "title": "Broforce",
+    "rating": 8
+   },
+   {
+    "igdbId": 348175,
+    "slug": "super-meat-boy-3d",
+    "title": "Super Meat Boy 3D",
+    "rating": 5
+   },
+   {
+    "igdbId": 372112,
+    "slug": "black-jacket",
+    "title": "Black Jacket",
+    "rating": null
+   },
+   {
+    "igdbId": 12520,
+    "slug": "lovers-in-a-dangerous-spacetime",
+    "title": "Lovers in a Dangerous Spacetime",
+    "rating": 8
+   },
+   {
+    "igdbId": 27134,
+    "slug": "deep-rock-galactic",
+    "title": "Deep Rock Galactic",
+    "rating": 9
+   },
+   {
+    "igdbId": 119305,
+    "slug": "lego-star-wars-the-skywalker-saga",
+    "title": "LEGO Star Wars: The Skywalker Saga",
+    "rating": null
+   },
+   {
+    "igdbId": 314243,
+    "slug": "revenge-of-the-savage-planet",
+    "title": "Revenge of the Savage Planet",
+    "rating": 10
+   },
+   {
+    "igdbId": 5606,
+    "slug": "assassins-creed-unity",
+    "title": "Assassin's Creed Unity",
+    "rating": null
+   },
+   {
+    "igdbId": 20910,
+    "slug": "world-war-z",
+    "title": "World War Z",
+    "rating": null
+   },
+   {
+    "igdbId": 8948,
+    "slug": "routine",
+    "title": "Routine",
+    "rating": 7
+   },
+   {
+    "igdbId": 28540,
+    "slug": "assassins-creed-origins",
+    "title": "Assassin's Creed Origins",
+    "rating": 9
+   },
+   {
+    "igdbId": 1905,
+    "slug": "fortnite",
+    "title": "Fortnite",
+    "rating": 8
+   },
+   {
+    "igdbId": 221822,
+    "slug": "assassins-creed-ii",
+    "title": "Assassin's Creed II",
+    "rating": 8
+   },
+   {
+    "igdbId": 142415,
+    "slug": "indiana-jones-and-the-great-circle",
+    "title": "Indiana Jones and the Great Circle",
+    "rating": 9
+   },
+   {
+    "igdbId": 164867,
+    "slug": "dredge",
+    "title": "Dredge",
+    "rating": 7
+   },
+   {
+    "igdbId": 111529,
+    "slug": "boomerang-fu",
+    "title": "Boomerang Fu",
+    "rating": 8
+   },
+   {
+    "igdbId": 204634,
+    "slug": "the-alters",
+    "title": "The Alters",
+    "rating": 9
+   },
+   {
+    "igdbId": 36749,
+    "slug": "monument-valley-ii",
+    "title": "Monument Valley II",
+    "rating": 7
+   },
+   {
+    "igdbId": 8900,
+    "slug": "monument-valley",
+    "title": "Monument Valley",
+    "rating": 7
+   },
+   {
+    "igdbId": 113112,
+    "slug": "hades--1",
+    "title": "Hades",
+    "rating": 7
+   },
+   {
+    "igdbId": 342901,
+    "slug": "aerial-knights-dropshot",
+    "title": "Aerial_Knight's DropShot",
+    "rating": 2
+   },
+   {
+    "igdbId": 317865,
+    "slug": "drop-duchy",
+    "title": "Drop Duchy",
+    "rating": 6
+   },
+   {
+    "igdbId": 10239,
+    "slug": "ark-survival-evolved",
+    "title": "Ark: Survival Evolved",
+    "rating": 7
+   },
+   {
+    "igdbId": 348220,
+    "slug": "call-of-duty-black-ops-7",
+    "title": "Call of Duty: Black Ops 7",
+    "rating": 7
+   },
+   {
+    "igdbId": 11198,
+    "slug": "rocket-league",
+    "title": "Rocket League",
+    "rating": 6
+   },
+   {
+    "igdbId": 9174,
+    "slug": "little-nightmares",
+    "title": "Little Nightmares",
+    "rating": 8
+   },
+   {
+    "igdbId": 11642,
+    "slug": "geometry-dash",
+    "title": "Geometry Dash",
+    "rating": 7
+   },
+   {
+    "igdbId": 2935,
+    "slug": "papers-please",
+    "title": "Papers, Please",
+    "rating": null
+   },
+   {
+    "igdbId": 119313,
+    "slug": "fall-guys",
+    "title": "Fall Guys",
+    "rating": 8
+   },
+   {
+    "igdbId": 19456,
+    "slug": "ori-and-the-blind-forest-definitive-edition",
+    "title": "Ori and the Blind Forest: Definitive Edition",
+    "rating": 9
+   },
+   {
+    "igdbId": 111469,
+    "slug": "among-us",
+    "title": "Among Us",
+    "rating": 8
+   },
+   {
+    "igdbId": 121,
+    "slug": "minecraft-java-edition",
+    "title": "Minecraft: Java Edition",
+    "rating": 10
+   },
+   {
+    "igdbId": 325588,
+    "slug": "rematch--1",
+    "title": "Rematch",
+    "rating": 9
+   },
+   {
+    "igdbId": 8347,
+    "slug": "the-long-dark",
+    "title": "The Long Dark",
+    "rating": 8
+   },
+   {
+    "igdbId": 107315,
+    "slug": "subnautica-below-zero",
+    "title": "Subnautica: Below Zero",
+    "rating": 8
+   },
+   {
+    "igdbId": 22917,
+    "slug": "gris",
+    "title": "Gris",
+    "rating": 8
+   },
+   {
+    "igdbId": 139090,
+    "slug": "inscryption",
+    "title": "Inscryption",
+    "rating": 8
+   },
+   {
+    "igdbId": 122565,
+    "slug": "humanity",
+    "title": "Humanity",
+    "rating": 9
+   },
+   {
+    "igdbId": 198499,
+    "slug": "chants-of-sennaar",
+    "title": "Chants of Sennaar",
+    "rating": 9
+   },
+   {
+    "igdbId": 9061,
+    "slug": "cuphead",
+    "title": "Cuphead",
+    "rating": 9
+   },
+   {
+    "igdbId": 18158,
+    "slug": "ultimate-chicken-horse",
+    "title": "Ultimate Chicken Horse",
+    "rating": 7
+   },
+   {
+    "igdbId": 72,
+    "slug": "portal-2",
+    "title": "Portal 2",
+    "rating": 10
+   },
+   {
+    "igdbId": 137112,
+    "slug": "knight-squad-2",
+    "title": "Knight Squad 2",
+    "rating": 9
+   },
+   {
+    "igdbId": 11177,
+    "slug": "gang-beasts",
+    "title": "Gang Beasts",
+    "rating": 8
+   },
+   {
+    "igdbId": 3152,
+    "slug": "don-t-starve",
+    "title": "Don't Starve",
+    "rating": 9
+   },
+   {
+    "igdbId": 19542,
+    "slug": "oxygen-not-included",
+    "title": "Oxygen Not Included",
+    "rating": 7
+   },
+   {
+    "igdbId": 866,
+    "slug": "sid-meier-s-civilization-v",
+    "title": "Sid Meier's Civilization V",
+    "rating": 9
+   },
+   {
+    "igdbId": 14761,
+    "slug": "rain-world",
+    "title": "Rain World",
+    "rating": 10
+   },
+   {
+    "igdbId": 135400,
+    "slug": "minecraft--1",
+    "title": "Minecraft",
+    "rating": 10
+   },
+   {
+    "igdbId": 1879,
+    "slug": "terraria",
+    "title": "Terraria",
+    "rating": 10
+   },
+   {
+    "igdbId": 26226,
+    "slug": "celeste",
+    "title": "Celeste",
+    "rating": 8
+   },
+   {
+    "igdbId": 17000,
+    "slug": "stardew-valley",
+    "title": "Stardew Valley",
+    "rating": 9
+   },
+   {
+    "igdbId": 71,
+    "slug": "portal",
+    "title": "Portal",
+    "rating": 8
+   },
+   {
+    "igdbId": 9254,
+    "slug": "subnautica",
+    "title": "Subnautica",
+    "rating": 8
+   },
+   {
+    "igdbId": 346035,
+    "slug": "ball-x-pit",
+    "title": "Ball x Pit",
+    "rating": 8
+   },
+   {
+    "igdbId": 251833,
+    "slug": "balatro",
+    "title": "Balatro",
+    "rating": 10
+   },
+   {
+    "igdbId": 14593,
+    "slug": "hollow-knight",
+    "title": "Hollow Knight",
+    "rating": 10
+   }
+  ],
+  "playing": [
+   {
+    "igdbId": 19241,
+    "slug": "unravel-two",
+    "title": "Unravel Two",
+    "rating": null
+   },
+   {
+    "igdbId": 4844,
+    "slug": "lego-the-hobbit",
+    "title": "LEGO The Hobbit",
+    "rating": null
+   },
+   {
+    "igdbId": 36897,
+    "slug": "a-way-out",
+    "title": "A Way Out",
+    "rating": null
+   },
+   {
+    "igdbId": 320140,
+    "slug": "subnautica-2",
+    "title": "Subnautica 2",
+    "rating": null
+   },
+   {
+    "igdbId": 7342,
+    "slug": "inside",
+    "title": "Inside",
+    "rating": null
+   },
+   {
+    "igdbId": 1266,
+    "slug": "assassin-s-creed-iii",
+    "title": "Assassin's Creed III",
+    "rating": null
+   },
+   {
+    "igdbId": 76638,
+    "slug": "baba-is-you",
+    "title": "Baba Is You",
+    "rating": null
+   },
+   {
+    "igdbId": 149657,
+    "slug": "blue-prince",
+    "title": "Blue Prince",
+    "rating": 10
+   },
+   {
+    "igdbId": 2050,
+    "slug": "lego-marvel-super-heroes",
+    "title": "LEGO Marvel Super Heroes",
+    "rating": null
+   },
+   {
+    "igdbId": 135243,
+    "slug": "it-takes-two",
+    "title": "It Takes Two",
+    "rating": null
+   },
+   {
+    "igdbId": 194464,
+    "slug": "escape-academy",
+    "title": "Escape Academy",
+    "rating": null
+   },
+   {
+    "igdbId": 9918,
+    "slug": "lego-jurassic-world",
+    "title": "LEGO Jurassic World",
+    "rating": null
+   },
+   {
+    "igdbId": 25083,
+    "slug": "lego-harry-potter-collection",
+    "title": "LEGO Harry Potter Collection",
+    "rating": null
+   },
+   {
+    "igdbId": 115289,
+    "slug": "hollow-knight-silksong",
+    "title": "Hollow Knight: Silksong",
+    "rating": null
+   }
+  ],
+  "backlog": [
+   {
+    "igdbId": 348200,
+    "slug": "planet-of-lana-ii-children-of-the-leaf",
+    "title": "Planet of Lana II: Children of the Leaf",
+    "rating": null
+   },
+   {
+    "igdbId": 69547,
+    "slug": "vintage-story",
+    "title": "Vintage Story",
+    "rating": null
+   },
+   {
+    "igdbId": 19241,
+    "slug": "unravel-two",
+    "title": "Unravel Two",
+    "rating": null
+   },
+   {
+    "igdbId": 214397,
+    "slug": "moving-out-2",
+    "title": "Moving Out 2",
+    "rating": null
+   },
+   {
+    "igdbId": 337738,
+    "slug": "assassins-creed-black-flag-resynced",
+    "title": "Assassin's Creed Black Flag Resynced",
+    "rating": null
+   },
+   {
+    "igdbId": 305157,
+    "slug": "mixtape--1",
+    "title": "Mixtape",
+    "rating": null
+   },
+   {
+    "igdbId": 26855,
+    "slug": "dead-cells",
+    "title": "Dead Cells",
+    "rating": null
+   },
+   {
+    "igdbId": 164290,
+    "slug": "frostpunk-2",
+    "title": "Frostpunk 2",
+    "rating": null
+   },
+   {
+    "igdbId": 136625,
+    "slug": "hogwarts-legacy",
+    "title": "Hogwarts Legacy",
+    "rating": null
+   },
+   {
+    "igdbId": 9630,
+    "slug": "fallout-4",
+    "title": "Fallout 4",
+    "rating": null
+   },
+   {
+    "igdbId": 19531,
+    "slug": "prey--1",
+    "title": "Prey",
+    "rating": null
+   },
+   {
+    "igdbId": 348192,
+    "slug": "aphelion--1",
+    "title": "Aphelion",
+    "rating": null
+   },
+   {
+    "igdbId": 1970,
+    "slug": "assassins-creed-iv-black-flag",
+    "title": "Assassin's Creed IV Black Flag",
+    "rating": null
+   },
+   {
+    "igdbId": 300976,
+    "slug": "assassins-creed-shadows",
+    "title": "Assassin's Creed Shadows",
+    "rating": null
+   },
+   {
+    "igdbId": 215060,
+    "slug": "assassins-creed-mirage",
+    "title": "Assassin's Creed Mirage",
+    "rating": null
+   },
+   {
+    "igdbId": 103054,
+    "slug": "assassins-creed-odyssey",
+    "title": "Assassin's Creed Odyssey",
+    "rating": null
+   },
+   {
+    "igdbId": 19686,
+    "slug": "resident-evil-2--1",
+    "title": "Resident Evil 2",
+    "rating": null
+   },
+   {
+    "igdbId": 1877,
+    "slug": "cyberpunk-2077",
+    "title": "Cyberpunk 2077",
+    "rating": null
+   },
+   {
+    "igdbId": 328347,
+    "slug": "death-howl",
+    "title": "Death Howl",
+    "rating": null
+   },
+   {
+    "igdbId": 325609,
+    "slug": "dispatch--3",
+    "title": "Dispatch",
+    "rating": null
+   },
+   {
+    "igdbId": 115289,
+    "slug": "hollow-knight-silksong",
+    "title": "Hollow Knight: Silksong",
+    "rating": null
+   },
+   {
+    "igdbId": 76638,
+    "slug": "baba-is-you",
+    "title": "Baba Is You",
+    "rating": null
+   },
+   {
+    "igdbId": 52189,
+    "slug": "grand-theft-auto-vi",
+    "title": "Grand Theft Auto VI",
+    "rating": null
+   },
+   {
+    "igdbId": 1009,
+    "slug": "the-last-of-us",
+    "title": "The Last of Us",
+    "rating": null
+   },
+   {
+    "igdbId": 119133,
+    "slug": "elden-ring",
+    "title": "Elden Ring",
+    "rating": null
+   },
+   {
+    "igdbId": 371949,
+    "slug": "avatar-frontiers-of-pandora-from-the-ashes",
+    "title": "Avatar: Frontiers of Pandora - From the Ashes",
+    "rating": null
+   },
+   {
+    "igdbId": 212089,
+    "slug": "lethal-company",
+    "title": "Lethal Company",
+    "rating": null
+   },
+   {
+    "igdbId": 27082,
+    "slug": "raft",
+    "title": "Raft",
+    "rating": null
+   },
+   {
+    "igdbId": 194741,
+    "slug": "ship-of-fools",
+    "title": "Ship of Fools",
+    "rating": null
+   },
+   {
+    "igdbId": 113360,
+    "slug": "hytale",
+    "title": "Hytale",
+    "rating": null
+   },
+   {
+    "igdbId": 361855,
+    "slug": "lego-batman-legacy-of-the-dark-knight",
+    "title": "LEGO Batman: Legacy of the Dark Knight",
+    "rating": null
+   },
+   {
+    "igdbId": 1331,
+    "slug": "limbo",
+    "title": "Limbo",
+    "rating": null
+   },
+   {
+    "igdbId": 1942,
+    "slug": "the-witcher-3-wild-hunt",
+    "title": "The Witcher 3: Wild Hunt",
+    "rating": null
+   },
+   {
+    "igdbId": 25076,
+    "slug": "red-dead-redemption-2",
+    "title": "Red Dead Redemption 2",
+    "rating": null
+   },
+   {
+    "igdbId": 13182,
+    "slug": "far-cry-primal",
+    "title": "Far Cry: Primal",
+    "rating": null
+   },
+   {
+    "igdbId": 252476,
+    "slug": "prince-of-persia-the-lost-crown",
+    "title": "Prince of Persia: The Lost Crown",
+    "rating": null
+   },
+   {
+    "igdbId": 347646,
+    "slug": "lego-voyagers",
+    "title": "LEGO Voyagers",
+    "rating": null
+   },
+   {
+    "igdbId": 37001,
+    "slug": "ori-and-the-will-of-the-wisps",
+    "title": "Ori and the Will of the Wisps",
+    "rating": null
+   },
+   {
+    "igdbId": 250621,
+    "slug": "neva",
+    "title": "Neva",
+    "rating": null
+   },
+   {
+    "igdbId": 12517,
+    "slug": "undertale",
+    "title": "Undertale",
+    "rating": null
+   },
+   {
+    "igdbId": 281275,
+    "slug": "buckshot-roulette",
+    "title": "Buckshot Roulette",
+    "rating": null
+   },
+   {
+    "igdbId": 11737,
+    "slug": "outer-wilds",
+    "title": "Outer Wilds",
+    "rating": null
+   },
+   {
+    "igdbId": 28815,
+    "slug": "lego-marvel-super-heroes-2",
+    "title": "LEGO Marvel Super Heroes 2",
+    "rating": null
+   },
+   {
+    "igdbId": 11069,
+    "slug": "lego-marvels-avengers",
+    "title": "LEGO Marvel's Avengers",
+    "rating": null
+   },
+   {
+    "igdbId": 94876,
+    "slug": "lego-the-incredibles",
+    "title": "LEGO The Incredibles",
+    "rating": null
+   },
+   {
+    "igdbId": 325594,
+    "slug": "split-fiction",
+    "title": "Split Fiction",
+    "rating": null
+   },
+   {
+    "igdbId": 305152,
+    "slug": "clair-obscur-expedition-33",
+    "title": "Clair Obscur: Expedition 33",
+    "rating": null
+   }
+  ],
+  "wishlist": [
+   {
+    "igdbId": 194741,
+    "slug": "ship-of-fools",
+    "title": "Ship of Fools",
+    "rating": null
+   },
+   {
+    "igdbId": 72,
+    "slug": "portal-2",
+    "title": "Portal 2",
+    "rating": 10
+   },
+   {
+    "igdbId": 314265,
+    "slug": "reanimal",
+    "title": "Reanimal",
+    "rating": null
+   },
+   {
+    "igdbId": 347646,
+    "slug": "lego-voyagers",
+    "title": "LEGO Voyagers",
+    "rating": null
+   },
+   {
+    "igdbId": 125633,
+    "slug": "crimson-desert-enhanced--1",
+    "title": "Crimson Desert Enhanced",
+    "rating": null
+   }
+  ]
+ }
+}
