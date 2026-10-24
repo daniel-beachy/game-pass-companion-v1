@@ -192,7 +192,7 @@ export function steamScore(g: Game): { pct: number; total: number; label: string
 
 // ---------- Leaving soon ----------
 
-export type VerdictKind = "comfortable" | "tight" | "dont" | "unknown" | "endless";
+export type VerdictKind = "comfortable" | "tight" | "dont" | "unknown" | "endless" | "nodeadline";
 export interface Verdict {
   kind: VerdictKind;
   headline: string;
@@ -218,6 +218,11 @@ export function verdict(g: Game, pace: number, goal: "main" | "complete" = "main
     if (g.tags.some((t) => ENDLESS.has(t)))
       return { ...base, kind: "endless", perWeekNeeded: null, headline: "No ending to race", detail: "This is a play-whenever game. Enjoy it while it's here." };
     return { ...base, kind: "unknown", perWeekNeeded: null, headline: "Length unknown", detail: "No reliable time-to-beat data. Check HowLongToBeat before starting." };
+  }
+  // Not announced as leaving: there's no deadline to race, just how long it'll take.
+  if (!g.exitDate) {
+    const weeks = Math.ceil(need / Math.max(pace, 1));
+    return { ...base, kind: "nodeadline", perWeekNeeded: null, headline: "No rush", detail: `Not announced as leaving, so there's no deadline. About ${fmtH(need)} to finish, roughly ${weeks} ${weeks === 1 ? "week" : "weeks"} at your pace.` };
   }
   const perWeekNeeded = daysLeft > 0 ? Math.round((need / (daysLeft / 7)) * 10) / 10 : Infinity;
   const ratio = hoursAvailable / need;

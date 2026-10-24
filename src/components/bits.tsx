@@ -81,11 +81,11 @@ export function MatchPill({ m }: { m: Match }) {
 }
 
 export function VerdictPill({ v }: { v: Verdict }) {
-  return <span className={"verdict " + v.kind}>{v.kind === "comfortable" ? "Comfortable" : v.kind === "tight" ? "Tight" : v.kind === "dont" ? "Don't start" : v.kind === "endless" ? "No end" : "Unknown length"}</span>;
+  return <span className={"verdict " + v.kind}>{v.kind === "comfortable" ? "Comfortable" : v.kind === "tight" ? "Tight" : v.kind === "dont" ? "Don't start" : v.kind === "endless" ? "No end" : v.kind === "nodeadline" ? "No rush" : "Unknown length"}</span>;
 }
 
 export function TimeBar({ v }: { v: Verdict }) {
-  if (!v.hoursNeeded) return null;
+  if (!v.hoursNeeded || v.kind === "nodeadline") return null;
   const max = Math.max(v.hoursNeeded, v.hoursAvailable) || 1;
   return (
     <div className={"timebar " + v.kind} aria-label={`Needs ${fmtH(v.hoursNeeded)}, you have about ${fmtH(v.hoursAvailable)}`}>

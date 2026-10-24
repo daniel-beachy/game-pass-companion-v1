@@ -581,7 +581,8 @@ input[type="range"] {
   padding: 2px 9px;
   white-space: nowrap;
 }
-.verdict.comfortable {
+.verdict.comfortable,
+.verdict.nodeadline {
   color: var(--accent);
   background: var(--accent-soft);
 }

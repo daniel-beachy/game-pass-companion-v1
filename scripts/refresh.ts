@@ -205,8 +205,9 @@ function buildGame(
   const hours = (s?: number) => (s ? Math.round((s / 3600) * 10) / 10 : null);
   const ttbOut: Game["ttb"] = ov?.ttb
     ? { main: ov.ttb.main, extra: null, complete: ov.ttb.complete ?? null, count: 0, source: "Hand-checked" }
-    : t && (t.normally || t.hastily)
-      ? { main: hours(t.normally ?? t.hastily), extra: hours(t.hastily), complete: hours(t.completely), count: t.count ?? 0, source: "IGDB" }
+    : // IGDB: hastily = main story, normally = main + extras, completely = 100%.
+      t && (t.normally || t.hastily)
+      ? { main: hours(t.hastily ?? t.normally), extra: hours(t.normally), complete: hours(t.completely), count: t.count ?? 0, source: "IGDB" }
       : null;
   if (ttbOut?.main && ttbOut.main <= 5) tags.push("short");
 
