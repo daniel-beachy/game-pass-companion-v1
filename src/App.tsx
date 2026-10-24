@@ -56,6 +56,9 @@ export default function App() {
                 {counts && (id === "leaving" || id === "coming") && counts[id] ? <span className="nav-count mono">{counts[id]}</span> : null}
               </a>
             ))}
+            <a className="nav-ext" href="https://daniel-beachy.github.io/">
+              Portfolio
+            </a>
           </nav>
         </div>
       </header>

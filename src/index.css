@@ -169,6 +169,12 @@ p {
   color: var(--text);
   background: var(--surface-2);
 }
+.nav a.nav-ext {
+  margin-left: 6px;
+  border-left: 1px solid var(--line, rgba(255, 255, 255, 0.12));
+  border-radius: 0;
+  padding-left: 14px;
+}
 .nav-count {
   font-size: 0.72rem;
   color: var(--text-3);
