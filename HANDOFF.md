@@ -52,3 +52,8 @@ Everything in "Still to do" steps 1–7 is built. Remaining:
 6. `.github/workflows/refresh.yml`: daily refresh, then blurbs if the token exists, then commit data, build and deploy Pages. Also `digest.yml`: weekly, Sunday 14:00 UTC.
 7. Verify visually in the browser preview (desktop and mobile) and iterate. Then a README with setup steps for secrets and running locally. Then enable Pages and send Dan the link.
 8. Afterwards, if Dan likes it, add a portfolio card. See memory `portfolio-card-workflow`.
+
+## 2026-10-23 (late)
+- Portfolio card added (daniel-beachy.github.io, last in order, thumbnail = It Takes Two detail view). App header has a Portfolio link.
+- Fixed: verdict said "Don't start" for every game without an exit date (daysLeft was 0). Those now get "No rush" with weeks-to-finish.
+- Fixed: IGDB `hastily`/`normally` were swapped (main story was showing main + extras). 73 notes became out of date as a result; the nightly job rewrites them at 30 per night.
