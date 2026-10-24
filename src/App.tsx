@@ -57,7 +57,7 @@ export default function App() {
               </a>
             ))}
             <a className="nav-ext" href="https://daniel-beachy.github.io/">
-              Portfolio
+              More projects
             </a>
           </nav>
         </div>
