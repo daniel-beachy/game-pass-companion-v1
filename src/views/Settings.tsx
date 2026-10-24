@@ -274,7 +274,7 @@ function ClaudeNotes({ data }: { data: AppData }) {
   const st = data.blurbStatus;
   const written = Object.keys(data.blurbs).length;
   return (
-    <Section title="Claude notes" sub="Short “why this game” notes written by Claude (Sonnet 5.5) on Dan's Pro plan. They only run when you ask, so they never use the plan in the background.">
+    <Section title="Claude notes" sub="Short “why this game” notes written by Claude (Sonnet 5.5) on Dan's Pro plan. The nightly update writes up to 30 that are missing or whose game changed, and only calls Claude when there's something to write.">
       <p className="small">
         {written} {written === 1 ? "note" : "notes"} written.{" "}
         {st ? (st.pending ? `${st.pending} top matches don't have one yet or have changed (checked ${fmtDate(st.checkedAt, { month: "short", day: "numeric" })}).` : "Everything that ranks well has a note.") : ""}
@@ -285,7 +285,7 @@ function ClaudeNotes({ data }: { data: AppData }) {
         </a>
       </div>
       <p className="muted small">
-        Opens GitHub. Click <strong>Run workflow</strong> (you need to be signed in as Dan). It writes notes only for games that are missing one or whose details changed, then republishes the site in a few minutes. Without a note, the site shows a simpler rule-based explanation.
+        To get them sooner, this opens GitHub. Click <strong>Run workflow</strong> (you need to be signed in as Dan). It writes notes only for games that are missing one or whose details changed, then republishes the site in a few minutes. Without a note, the site shows a simpler rule-based explanation.
       </p>
     </Section>
   );

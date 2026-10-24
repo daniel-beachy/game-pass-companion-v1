@@ -55,7 +55,7 @@ export function About({ data }: { data: AppData }) {
             <strong>Your history</strong> comes from Dan's Backloggd lists, imported with a bookmarklet because Backloggd has no API.
           </li>
           <li>
-            <strong>The "why this game" notes</strong> {blurbCount ? `(${blurbCount} so far)` : ""} are written by Claude from the same data, told to be plain and honest and to say when a game might not click. They're only written when Dan asks for them from Settings. Where there isn't one yet, you'll see a simpler rule-based explanation.
+            <strong>The "why this game" notes</strong> {blurbCount ? `(${blurbCount} so far)` : ""} are written by Claude from the same data, told to be plain and honest and to say when a game might not click. Each is written once; the nightly update only asks Claude for new ones when a game newly ranks well or meaningfully changes. Where there isn't one yet, you'll see a simpler rule-based explanation.
           </li>
         </ul>
       </Section>

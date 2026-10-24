@@ -34,10 +34,22 @@ jobs:
           IGDB_CLIENT_SECRET: ${{ secrets.IGDB_CLIENT_SECRET }}
         run: npx tsx scripts/refresh.ts
 
-      # Counts missing Claude notes for the site; writing them is the manual "Write Claude notes" workflow.
+      # Counts missing Claude notes (no Claude usage). Claude only runs below when something is missing.
       - name: Check Claude notes
+        id: notes
         if: github.event_name != 'push'
-        run: npx tsx scripts/blurbs.ts --status
+        run: |
+          npx tsx scripts/blurbs.ts --status
+          echo "pending=$(node -p 'require("./public/data/blurbs-status.json").pending')" >> "$GITHUB_OUTPUT"
+
+      - name: Write missing Claude notes (up to 30)
+        if: github.event_name != 'push' && steps.notes.outputs.pending != '0'
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          BLURB_LIMIT: "30"
+        run: |
+          npm install -g @anthropic-ai/claude-code
+          npx tsx scripts/blurbs.ts
 
       - name: Digest preview page
         run: npx tsx scripts/digest.ts

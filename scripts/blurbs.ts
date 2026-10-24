@@ -1,7 +1,8 @@
 // Writes short "why this game" notes with Claude Code (Dan's Pro plan, via CLAUDE_CODE_OAUTH_TOKEN).
-// Runs only when Dan starts the "Write Claude notes" workflow. Only games that rank well for a
-// profile get one, each is written once, and a run is capped. `--status` just counts what's
-// missing (no Claude calls) so the site can show it; the nightly refresh runs that.
+// Runs nightly and from the manual "Write Claude notes" workflow. Only games that rank well for a
+// profile get one, each is written once, and Claude is only called when a note is missing or the
+// game meaningfully changed (see `fingerprint`). Nightly runs are capped at 30 notes.
+// `--status` just counts what's missing, with no Claude calls.
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { DEFAULT_PROFILES, type Profile } from "../src/lib/profiles.ts";
@@ -15,6 +16,7 @@ const MODEL = "claude-sonnet-5-5";
 const PER_PROFILE = 30; // top matches per profile that get a note
 const MAX_PER_RUN = Number(process.env.BLURB_LIMIT ?? 100);
 const BATCH = 25;
+const HASH_VERSION = 2;
 
 const catalog = readJson<CatalogFile | null>("public/data/catalog.json", null);
 const blurbs = readJson<BlurbFile & Record<string, { hash?: string }>>("public/data/blurbs.json", {});
@@ -40,6 +42,25 @@ function describe(g: Game, p: Profile, reason: string, cautions: string[]) {
     matchedOn: reason,
     possibleConcerns: cautions,
   };
+}
+
+// What decides whether a note is out of date. Leaves out things that drift night to night (exact
+// review percentages, ranking wording) so a note is only rewritten when the game really changed.
+function fingerprint(g: Game, p: Profile, data: ReturnType<typeof describe>) {
+  const band = (n: number | null | undefined, step: number) => (n == null ? null : Math.round(n / step) * step);
+  const pos = g.steam && g.steam.positive + g.steam.negative >= 50 ? (100 * g.steam.positive) / (g.steam.positive + g.steam.negative) : null;
+  const stable = {
+    title: g.title,
+    tags: [...data.tags].sort(),
+    hours: band(g.ttb?.main, 5),
+    critic: band(g.igdb?.criticScore, 10),
+    steam: band(pos, 10),
+    localPlay: data.localPlay,
+    leaving: data.leavingOn ?? null,
+    description: data.storeDescription.slice(0, 200),
+    notes: p.notes,
+  };
+  return createHash("sha1").update(JSON.stringify(stable)).digest("hex").slice(0, 10);
 }
 
 function prompt(p: Profile, items: { key: string; data: unknown }[]) {
@@ -97,8 +118,11 @@ async function main() {
     for (const { g, m } of pick) {
       const key = `${g.id}:${p.id}`;
       const data = describe(g, p, m.reason, m.cautions);
-      const hash = createHash("sha1").update(JSON.stringify([data, p.notes])).digest("hex").slice(0, 10);
-      if (blurbs[key]?.hash === hash || todo.some((t) => t.key === key)) continue;
+      const hash = fingerprint(g, p, data);
+      const have = blurbs[key] as { hash?: string; hv?: number } | undefined;
+      // Notes from before the fingerprint change are kept as they are, not rewritten.
+      if (have && have.hv !== HASH_VERSION) Object.assign(have, { hash, hv: HASH_VERSION });
+      if (have?.hash === hash || todo.some((t) => t.key === key)) continue;
       todo.push({ p, key, hash, data });
     }
   }
@@ -120,7 +144,7 @@ async function main() {
         for (const r of res) {
           const t = batch.find((b) => b.key === r.key);
           if (!t || !r.text) continue;
-          blurbs[t.key] = { text: r.text.trim(), caveat: r.caveat?.trim() || undefined, generatedAt: new Date().toISOString(), hash: t.hash } as never;
+          blurbs[t.key] = { text: r.text.trim(), caveat: r.caveat?.trim() || undefined, generatedAt: new Date().toISOString(), hash: t.hash, hv: HASH_VERSION } as never;
           written++;
         }
         writeJson("public/data/blurbs.json", blurbs);

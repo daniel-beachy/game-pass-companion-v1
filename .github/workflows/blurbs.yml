@@ -1,6 +1,6 @@
 name: Write Claude notes
 
-# Manual only, so Claude usage happens just when Dan asks for it.
+# Manual run for writing notes right away. The nightly refresh also writes up to 30 missing ones.
 on:
   workflow_dispatch:
     inputs:

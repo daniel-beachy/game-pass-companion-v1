@@ -34,7 +34,7 @@ Set each with `gh secret set NAME --repo daniel-beachy/game-pass-companion-v1` a
 | Secret | Used for |
 | --- | --- |
 | `IGDB_CLIENT_ID`, `IGDB_CLIENT_SECRET` | Nightly refresh |
-| `CLAUDE_CODE_OAUTH_TOKEN` | "Why this game" notes, written by Claude (Sonnet 5.5) on a Claude Pro/Max plan. Create it with `claude setup-token`. Only used when you run the "Write Claude notes" workflow (Settings → Generate notes with Claude); optional. |
+| `CLAUDE_CODE_OAUTH_TOKEN` | "Why this game" notes, written by Claude (Sonnet 5.5) on a Claude Pro/Max plan. Create it with `claude setup-token`. Used by the nightly refresh (only when a note is missing or a game meaningfully changed, at most 30 a night) and the manual "Write Claude notes" workflow; optional. |
 | `GMAIL_USER`, `GMAIL_APP_PASSWORD` | Weekly digest. Needs a Gmail app password (Google Account → Security → 2-Step Verification → App passwords). Optional. |
 
 ## Editing profiles
